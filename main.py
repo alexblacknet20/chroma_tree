@@ -5,7 +5,8 @@ from app.file_observers import FSEHandler
 import time
 
 if __name__ == "__main__":
-    fetch_object(CURRENT_DIRECTORY)
+    results = fetch_object(CURRENT_DIRECTORY)
+    print(results)
     observer = Observer()
     handler = FSEHandler()
     observer.schedule(handler, path=CURRENT_DIRECTORY, recursive=True)
