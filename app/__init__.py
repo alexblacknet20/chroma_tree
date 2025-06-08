@@ -16,10 +16,14 @@ def process_path(path: str):
         results = [os.path.basename(path), "bad_formatting"]
     return results
 
-def fetch_object(object: str):
-    if os.path.isdir(object):
-        paths = os.listdir(object)
-        for item in paths:
-            fetch_object(item)
+def fetch_object(path: str):
+    """Recursively process ``path`` and return a list of processed results."""
+
+    results = []
+    if os.path.isdir(path):
+        for item in os.listdir(path):
+            item_path = os.path.join(path, item)
+            results.extend(fetch_object(item_path))
     else:
-        process_path(object)
+        results.append(process_path(path))
+    return results
